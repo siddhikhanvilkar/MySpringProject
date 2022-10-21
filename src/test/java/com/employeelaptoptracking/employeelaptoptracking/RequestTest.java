@@ -26,7 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class RequestTest {
 	@Autowired
 	RequestDao dao;
-	Request request=new Request(1,null, "Waiting","New Laptop",LocalDate.now(), null);
+	Request request=new Request(1,null, Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception{
 		
@@ -68,7 +68,7 @@ public class RequestTest {
 		request.setRequestId(1);
 		request.setEmpId(null);
 		request.setRequestType("New Laptop");
-		request.setStatus("Waiting");
+		request.setStatus(Request.Statuss.Confirmed);
 		request.setDate(LocalDate.now());
 		dao.save(request);
 		Request request1=(Request) dao.findById(request.getRequestId()).get();
@@ -76,8 +76,8 @@ public class RequestTest {
 	}
 	@Test
 	void testGetRequestD() {
-		Request r1=new Request(1,null,"Waiting","New Laptop",LocalDate.now(), null);
-		Request r2=new Request(2,null,"Waiting","New Laptop",LocalDate.now(), null);
+		Request r1=new Request(1,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
+		Request r2=new Request(2,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
 		dao.save(r1);
 		dao.save(r2);
 		long c = dao.count();

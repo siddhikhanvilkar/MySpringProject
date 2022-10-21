@@ -28,7 +28,7 @@ import com.model.Employee;
 import com.model.Request;
 @SpringBootTest
 public class AdminTest {
-	Request request=new Request(1,null,"Waiting","New Laptop",LocalDate.now(), null);
+	Request request=new Request(1,null,Request.Statuss.Waiting,"New Laptop",LocalDate.now(), null);
 	@Autowired
 	AdminDao dao1;
 	@Autowired
@@ -61,7 +61,7 @@ public class AdminTest {
 	@Test
     void testUpdateStatus() throws URISyntaxException, JsonProcessingException {
       RestTemplate template=new RestTemplate();
-      final String url="http://localhost:8080/updatestatus/1/Approved/NewEmployee";
+      final String url="http://localhost:8080/updatestatus/1/Waiting/NewEmployee";
       URI uri=new URI(url);
       HttpHeaders headers = new HttpHeaders();      
       HttpEntity<Request> ht = new HttpEntity<>( headers);
@@ -71,8 +71,8 @@ public class AdminTest {
 	//DAO
 	@Test
 	void testGetNewLaptopRequestAdminD() {
-		Request r1=new Request(1,null,"Waiting","New Laptop",LocalDate.now(), null);
-		Request r2=new Request(2,null,"Waiting","New Laptop",LocalDate.now(), null);
+		Request r1=new Request(1,null,Request.Statuss.Waiting,"New Laptop",LocalDate.now(), null);
+		Request r2=new Request(2,null,Request.Statuss.Waiting,"New Laptop",LocalDate.now(), null);
 		List<Request> list=new ArrayList<>();
 		list.add(r2);
 		list.add(r1);
@@ -85,7 +85,7 @@ public class AdminTest {
 	}
 	@Test
 	void TestUpdateStatusD() {
-		request.setStatus("Approved");
-		Assertions.assertEquals("Approved",request.getStatus());
+		request.setStatus(Request.Statuss.Confirmed);
+		Assertions.assertEquals(Request.Statuss.Confirmed,request.getStatus());
 	}
 }

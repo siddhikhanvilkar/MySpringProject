@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import com.dao.RequestDao;
 import com.model.Employee;
 import com.model.Request;
@@ -16,7 +16,7 @@ public class RequestService {
 	RequestDao requestdao;
 	
 	public String addRequest(Request request) {
-		request.setStatus("Waiting");
+		request.setStatus(Request.Statuss.Waiting);
 		request.setDate(LocalDate.now());
 		requestdao.save(request);
 		return "Added request";
@@ -25,7 +25,8 @@ public class RequestService {
 	public List<Request> getAllrequest(){
 		return requestdao.findAll();
 	}
-	public String updateRequest(int requestId,String status) {
+//	enum Status { Confirmed ,Waiting ,Rejected }
+	public String updateRequest(int requestId,Request.Statuss status) {
 		for(Request r:requestdao.findAll()) {
 			if(r.getRequestId()==requestId && r.getRequestType().equals("New Laptop")) {
 				r.setStatus(status);

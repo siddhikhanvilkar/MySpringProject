@@ -14,13 +14,14 @@ import lombok.Builder.Default;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request {
+	public enum Statuss { Waiting, Confirmed ,Rejected }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int requestId;
     @ManyToOne
     @JoinColumn(name = "emp_id")
     private Employee empId;
-    private String status;
+    private Statuss status;
     private String requestType;
     private LocalDate date;  // Create a date object
     @OneToOne(mappedBy="request")
