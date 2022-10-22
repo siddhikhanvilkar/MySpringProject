@@ -25,14 +25,12 @@ public class RequestController {
 	RequestService rservice;
 	@Autowired
 	EmployeeDao userDao;
-	@Autowired
-	RequestDao dao;
-	@GetMapping("/getrequests")
-	public List<Request> getRequests(){
-		return rservice.getAllrequest();
-	}
+//	@GetMapping("/getrequests")
+//	public List<Request> getRequests(){
+//		return rservice.getAllrequest();
+//	}
 	@PostMapping("/addrequest")
-    public ResponseEntity<?> addRequest(@RequestBody AuthenticateRequest authenticate)
+    public ResponseEntity<String> addRequest(@RequestBody AuthenticateRequest authenticate)
     {
         String username= authenticate.getUser().getUsername();
         String password= authenticate.getUser().getPassword();

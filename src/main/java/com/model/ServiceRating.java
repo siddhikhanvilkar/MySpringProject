@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 public class ServiceRating {
-	enum Rating { Worst, Poor, Good, Great }
+	public enum Rating { Worst, Poor, Good, Great }
 	@Id
 	@GeneratedValue
 	private int serviceRatingId;

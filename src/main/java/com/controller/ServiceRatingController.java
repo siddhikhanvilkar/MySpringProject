@@ -12,20 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.controllerexp.RequestIdNotFoundException;
 import com.dao.ServiceRatingDao;
 import com.model.ServiceRating;
+import com.services.RequestService;
 
 
 @RestController
 public class ServiceRatingController {
 	@Autowired
 	ServiceRatingDao dao;
+	@Autowired
+	RequestService rservice;
 	@PostMapping("/acceptrating")
-	public ResponseEntity<String> addRating(@RequestBody ServiceRating rating) throws RequestIdNotFoundException{
+	public ResponseEntity<String> addRating(@RequestBody ServiceRating rating){
 		try{
-			dao.save(rating);
-			return new ResponseEntity<String>("Rating Accepted successfully",HttpStatus.OK);
+				rservice.findRequestId(rating.getRequest().getRequestId()) ;
+				dao.save(rating);
+				return new ResponseEntity<String>("Rating Accepted successfully",HttpStatus.OK);	
 		}
-		catch (NoSuchElementException e) {
-			throw new RequestIdNotFoundException();
+		catch (RequestIdNotFoundException e) {
+			return new ResponseEntity<String>(e.getClass()+" "+ e.toString(),HttpStatus.OK);
 		}
 	}
 }

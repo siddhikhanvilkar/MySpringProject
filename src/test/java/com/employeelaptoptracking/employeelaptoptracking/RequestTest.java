@@ -45,23 +45,23 @@ public class RequestTest {
 	}
 	//API
 //	@Test
-//    void testAddRequest() throws URISyntaxException, JsonProcessingException {
+//	void testAddRequest() throws URISyntaxException, JsonProcessingException {
+//	      RestTemplate template=new RestTemplate();
+//	      final String url="http://localhost:8080/addrequest";
+//	      URI uri=new URI(url);
+//	      HttpHeaders headers = new HttpHeaders();      
+//	      HttpEntity<Request> ht = new HttpEntity<>( headers);
+//	      ResponseEntity<String> res=template.postForEntity(uri,ht,String.class);
+//	      Assertions.assertEquals(HttpStatus.OK,res.getStatusCode());
+//		}
+//	@Test
+//    void testGetRequest() throws URISyntaxException, JsonProcessingException {
 //      RestTemplate template=new RestTemplate();
-//      final String url="http://localhost:8080/acceptrequest";
+//      final String url="http://localhost:8080/getrequests";
 //      URI uri=new URI(url);
-//      HttpHeaders headers = new HttpHeaders();      
-//      HttpEntity<Request> ht = new HttpEntity<>(request, headers);
-//      ResponseEntity<String> res=template.postForEntity(uri,ht,String.class);
+//      ResponseEntity<String> res=template.getForEntity(uri,String.class);
 //      Assertions.assertEquals(HttpStatus.OK,res.getStatusCode());
 //	}
-	@Test
-    void testGetRequest() throws URISyntaxException, JsonProcessingException {
-      RestTemplate template=new RestTemplate();
-      final String url="http://localhost:8080/getrequests";
-      URI uri=new URI(url);
-      ResponseEntity<String> res=template.getForEntity(uri,String.class);
-      Assertions.assertEquals(HttpStatus.OK,res.getStatusCode());
-	}
 	//DAO
 	@Test
 	void testAddRequestD() {
@@ -74,13 +74,13 @@ public class RequestTest {
 		Request request1=(Request) dao.findById(request.getRequestId()).get();
 		Assertions.assertEquals(request.getRequestId(),request1.getRequestId());
 	}
-	@Test
-	void testGetRequestD() {
-		Request r1=new Request(1,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
-		Request r2=new Request(2,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
-		dao.save(r1);
-		dao.save(r2);
-		long c = dao.count();
-		Assertions.assertEquals(2, c);
-	}
+//	@Test
+//	void testGetRequestD() {
+//		Request r1=new Request(1,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
+//		Request r2=new Request(2,null,Request.Statuss.Confirmed,"New Laptop",LocalDate.now(), null);
+//		dao.save(r1);
+//		dao.save(r2);
+//		long c = dao.count();
+//		Assertions.assertEquals(2, c);
+//	}
 }

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.controllerexp.RequestIdNotFoundException;
+import com.controllerexp.NullValuesFoundException;
 
 @ControllerAdvice
-public class RequestIdAdviceController extends ResponseEntityExceptionHandler{
-	@ExceptionHandler(RequestIdNotFoundException.class)
-	public ResponseEntity<Object> handleProductNotFoundException(RequestIdNotFoundException i,WebRequest req)
+public class NullValuesAdviceController extends ResponseEntityExceptionHandler{
+	@ExceptionHandler(NullValuesFoundException.class)
+	public ResponseEntity<Object> handleProductNotFoundException(NullValuesFoundException i,WebRequest req)
     {
         
-        return new ResponseEntity<>(i.toString(),HttpStatus.NOT_FOUND);
+        return  new ResponseEntity<>(i.toString(),HttpStatus.NOT_FOUND);
     }
 }
